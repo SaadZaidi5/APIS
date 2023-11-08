@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Promise Example</h2>
+
+<p id="demo"></p>
+
+<label for="pizzaInput">Enter a pizza flavor:</label>
+<input type="text" id="pizzaInput">
+<button onclick="handlePizzaOrder()">Order Pizza</button>
+
+<p id="flavors">Available pizza flavors: Margherita, Pepperoni, Vegetarian, Hawaiian</p>
+
+<script>
+function myDisplayer(some) {
+  document.getElementById("demo").innerHTML = some;
+}
+
+function handlePizzaOrder() {
+  const selectedPizza = document.getElementById("pizzaInput").value.toLowerCase(); // Convert to lowercase for case-insensitive matching
+
+  let pizzaPromise = new Promise(function(resolve, reject) {
+    const validFlavors = ["margherita", "pepperoni", "vegetarian", "hawaiian"];
+
+    if (validFlavors.includes(selectedPizza)) {
+      resolve("Success! Your pizza order is confirmed.");
+    } else {
+      reject("Failure! We don't have that pizza flavor.");
+    }
+  });
+
+  pizzaPromise.then(
+    function (value) {
+      myDisplayer(value);
+    },
+    function (error) {
+      myDisplayer(error);
+    }
+  );
+}
+</script>
+
+</body>
+</html>
